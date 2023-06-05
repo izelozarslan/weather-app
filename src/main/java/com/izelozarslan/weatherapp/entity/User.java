@@ -28,7 +28,7 @@ public class User extends BaseEntity {
     @Column(name = "PASSWORD", length = 400, nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY,  mappedBy = "user")
     private List<City> cities = new ArrayList<>();
 
 }

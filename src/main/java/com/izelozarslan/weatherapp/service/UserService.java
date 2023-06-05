@@ -7,7 +7,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService extends BaseEntityService<User, UserRepository> {
+    private final UserRepository repository;
+
     public UserService(UserRepository repository) {
         super(repository);
+        this.repository=repository;
+    }
+
+    public boolean existsByUsername(String username){
+        return repository.existsByUsername(username);
     }
 }
