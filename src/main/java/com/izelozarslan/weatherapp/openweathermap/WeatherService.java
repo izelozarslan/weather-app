@@ -1,11 +1,13 @@
 package com.izelozarslan.weatherapp.openweathermap;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.izelozarslan.weatherapp.errormessages.WeatherErrorMessage;
+import com.izelozarslan.weatherapp.general.BusinessException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class WeatherService {
     @Value("${openweathermap.api.key}")
     private String apiKey;
 
-    public WeatherData getWeatherForecast(String cityName, String unit) {
+    public WeatherData getWeatherForecast(String cityName, String unit){
         String weatherForecast = weatherClient.getWeatherForecast(cityName, apiKey, unit);
         return parseWeatherData(weatherForecast);
     }
@@ -30,9 +32,8 @@ public class WeatherService {
             return objectMapper.readValue(weatherForecast, WeatherData.class);
         }
         catch (JsonProcessingException e) {
-            e.printStackTrace(); // TODO: HAta yakalama yapılacak
+            throw new BusinessException(WeatherErrorMessage.WEATHER_DATA_PARSING_ERROR);
         }
-        return null;
     }
 
 }
