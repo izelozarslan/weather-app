@@ -5,7 +5,9 @@ import com.izelozarslan.weatherapp.general.BaseErrorMessage;
 
 public enum CityErrorMessage implements BaseErrorMessage {
 
-    CITY_NOT_FOUND("City not found");
+    CITY_NOT_FOUND_WITH_ID("City not found with id: "),
+    CITY_NOT_CREATED_WITH_USER_ID("City not created with user id : "),
+    CITY_NOT_DELETED_WITH_ID("City not deleted with id: ");
 
     private final String message;
 

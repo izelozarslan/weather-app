@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CityService extends BaseEntityService<City, CityRepository> {
+public class CityEntityService extends BaseEntityService<City, CityRepository> {
 
     private CityRepository repository;
 
-    public CityService(CityRepository repository) {
+    public CityEntityService(CityRepository repository) {
         super(repository);
         this.repository = repository;
     }
