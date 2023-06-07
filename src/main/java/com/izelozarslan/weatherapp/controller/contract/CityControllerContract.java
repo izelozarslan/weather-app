@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CityControllerContract {
 
-    List<CityResponseDTO> findByUserId(Long userId);
+
 
     List<CityResponseDTO> findCityByUserId();
 

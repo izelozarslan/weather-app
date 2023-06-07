@@ -17,7 +17,7 @@ public class CityEntityService extends BaseEntityService<City, CityRepository> {
         this.repository = repository;
     }
 
-    public List<City> findByUserId(Long userId){
+    public List<City> findCitiesByUserId(Long userId){
         return repository.findCitiesByUserId(userId);
     }
 
