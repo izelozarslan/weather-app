@@ -1,6 +1,6 @@
 package com.izelozarslan.weatherapp.mapper;
 
-import com.izelozarslan.weatherapp.dto.user.UserDTO;
+import com.izelozarslan.weatherapp.dto.user.response.UserResponseDTO;
 import com.izelozarslan.weatherapp.security.auth.dto.AuthenticationRequestDTO;
 import com.izelozarslan.weatherapp.security.user.User;
 import org.mapstruct.Mapper;
@@ -12,7 +12,7 @@ public interface UserMapper {
 
     User convertToUser(AuthenticationRequestDTO authenticationRequestDTO);
 
-    UserDTO convertToUserDTO(User user);
+    UserResponseDTO convertToUserDTO(User user);
 
-    List<UserDTO> convertToUserDtoList(List<User> userList);
+    List<UserResponseDTO> convertToUserDtoList(List<User> userList);
 }

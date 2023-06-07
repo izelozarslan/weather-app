@@ -1,7 +1,7 @@
 package com.izelozarslan.weatherapp.controller;
 
 import com.izelozarslan.weatherapp.controller.contract.UserControllerContract;
-import com.izelozarslan.weatherapp.dto.user.UserDTO;
+import com.izelozarslan.weatherapp.dto.user.response.UserResponseDTO;
 import com.izelozarslan.weatherapp.general.RestResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +18,9 @@ public class UserController {
 
     private final UserControllerContract userControllerContract;
 
-//    @PostMapping
-//    public ResponseEntity<RestResponse<UserDTO>> save(@RequestBody UserSaveRequestDTO userSaveRequestDTO){
-//        UserDTO userDTO = userControllerContract.save(userSaveRequestDTO);
-//        return ResponseEntity.ok(RestResponse.of(userDTO));
-//    }
-
     @GetMapping
-    public ResponseEntity<RestResponse<List<UserDTO>>> findAll(){
-        List<UserDTO> userDTOList = userControllerContract.findAll();
-        return ResponseEntity.ok(RestResponse.of(userDTOList));
+    public ResponseEntity<RestResponse<List<UserResponseDTO>>> findAll(){
+        List<UserResponseDTO> userResponseDTOList = userControllerContract.findAll();
+        return ResponseEntity.ok(RestResponse.of(userResponseDTOList));
     }
 }

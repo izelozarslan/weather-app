@@ -5,8 +5,11 @@ import com.izelozarslan.weatherapp.general.BaseErrorMessage;
 
 public enum UserErrorMessage implements BaseErrorMessage {
 
-    USERNAME_ALREADY_TAKEN("Username already taken : "),
-    USERS_NOT_FOUND("Users not found");
+    EMAIL_ALREADY_TAKEN("Email already taken : "),
+    USERS_NOT_FOUND("Users not found : "),
+    AUTHENTICATION_FAILED("Authentication failed : "),
+    INVALID_EMAIL_OR_PASSWORD("Invalid email or password : "),
+    USER_NOT_CREATED("User not created ");
 
 
     private final String message;
