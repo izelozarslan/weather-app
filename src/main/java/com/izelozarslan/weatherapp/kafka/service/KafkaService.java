@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public <T> void sendMessage(T record, String topic) {
+    public <T> void sendMessageInfo(T record, String topic) {
         log.info(String.format("%s event => %s", topic, record.toString()));
         Message<T> message = MessageBuilder
                 .withPayload(record)
@@ -23,4 +23,14 @@ public class KafkaService {
                 .build();
         kafkaTemplate.send(message);
     }
+
+    public <T> void sendMessageError(T record, String topic) {
+        log.error(String.format("%s event => %s", topic, record.toString()));
+        Message<T> message = MessageBuilder
+                .withPayload(record)
+                .setHeader(KafkaHeaders.TOPIC, topic)
+                .build();
+        kafkaTemplate.send(message);
+    }
+
 }
