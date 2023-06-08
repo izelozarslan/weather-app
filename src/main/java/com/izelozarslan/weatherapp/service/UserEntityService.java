@@ -2,8 +2,8 @@ package com.izelozarslan.weatherapp.service;
 
 import com.izelozarslan.weatherapp.entity.City;
 import com.izelozarslan.weatherapp.errormessages.UserErrorMessage;
+import com.izelozarslan.weatherapp.exception.userexceptions.exception.UserNotFoundException;
 import com.izelozarslan.weatherapp.general.BaseEntityService;
-import com.izelozarslan.weatherapp.general.ItemNotFoundException;
 import com.izelozarslan.weatherapp.security.user.User;
 import com.izelozarslan.weatherapp.security.user.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -43,7 +43,7 @@ public class UserEntityService extends BaseEntityService<User, UserRepository> {
             User user = repository.findByEmail(userDetails.getUsername()).orElseThrow();
             return user;
         } else {
-            throw new ItemNotFoundException(UserErrorMessage.USERS_NOT_FOUND);
+            throw new UserNotFoundException(UserErrorMessage.USERS_NOT_FOUND.getMessage());
         }
     }
 }
