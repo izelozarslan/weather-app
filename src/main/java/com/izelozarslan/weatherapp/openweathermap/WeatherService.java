@@ -3,7 +3,7 @@ package com.izelozarslan.weatherapp.openweathermap;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.izelozarslan.weatherapp.errormessages.WeatherErrorMessage;
-import com.izelozarslan.weatherapp.general.BusinessException;
+import com.izelozarslan.weatherapp.exception.weatherexceptions.exception.WeatherDataNotParsedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class WeatherService {
             return objectMapper.readValue(weatherForecast, WeatherData.class);
         }
         catch (JsonProcessingException e) {
-            throw new BusinessException(WeatherErrorMessage.WEATHER_DATA_PARSING_ERROR);
+            throw new WeatherDataNotParsedException(WeatherErrorMessage.WEATHER_DATA_PARSING_ERROR.getMessage() + e);
         }
     }
 

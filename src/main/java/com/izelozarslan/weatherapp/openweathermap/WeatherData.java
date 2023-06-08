@@ -1,6 +1,7 @@
 package com.izelozarslan.weatherapp.openweathermap;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -115,6 +116,32 @@ public class WeatherData {
         public String pod;
 
 }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WeatherData that = (WeatherData) o;
+        return cnt == that.cnt &&
+                Objects.equals(list, that.list) &&
+                Objects.equals(city, that.city) &&
+                Objects.equals(cod, that.cod) &&
+                Objects.equals(message, that.message);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(cnt, list, city, cod, message);
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherData{" +
+                "cnt=" + cnt +
+                ", list=" + list +
+                ", city=" + city +
+                ", cod='" + cod + '\'' +
+                 ", message='" + message + '\'' +
+        '}';
+    }
 
 }
