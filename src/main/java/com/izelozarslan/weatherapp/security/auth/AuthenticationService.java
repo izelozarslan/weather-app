@@ -25,6 +25,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
@@ -38,6 +39,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final KafkaService kafkaService;
 
+    @Transactional
     public AuthenticationResponseDTO register(RegisterRequestDTO request) {
         try{
             validateEmailNotTaken(request.getEmail());
@@ -67,12 +69,16 @@ public class AuthenticationService {
         }
     }
 
+
     private void validateEmailNotTaken(String email) {
         if (repository.existsByEmail(email)) {
+            kafkaService.sendMessageError("Error registering user - email already taken: " + email, "logs");
             throw new UserNotCreatedException(UserErrorMessage.EMAIL_ALREADY_TAKEN.getMessage() + email);
         }
     }
 
+
+    @Transactional
     public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request) {
 
         try {
@@ -104,6 +110,7 @@ public class AuthenticationService {
 
         }
     }
+
 
     private void saveUserToken(User user, String jwtToken) {
         var token = Token.builder()
