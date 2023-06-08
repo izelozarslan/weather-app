@@ -1,8 +1,8 @@
 package com.izelozarslan.weatherapp.controller.contract.impl;
 
 import com.izelozarslan.weatherapp.controller.contract.CityControllerContract;
-import com.izelozarslan.weatherapp.dto.city.response.CityResponseDTO;
 import com.izelozarslan.weatherapp.dto.city.request.CitySaveRequestDTO;
+import com.izelozarslan.weatherapp.dto.city.response.CityResponseDTO;
 import com.izelozarslan.weatherapp.entity.City;
 import com.izelozarslan.weatherapp.errormessages.CityErrorMessage;
 import com.izelozarslan.weatherapp.exception.cityexceptions.exception.CityNotCreatedException;
@@ -15,6 +15,7 @@ import com.izelozarslan.weatherapp.service.CityEntityService;
 import com.izelozarslan.weatherapp.service.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +48,7 @@ public class CityControllerContactImpl implements CityControllerContract {
         }
     }
 
+    @Transactional
     @Override
     public CityResponseDTO save(CitySaveRequestDTO citySaveRequestDTO) {
 
@@ -72,6 +74,7 @@ public class CityControllerContactImpl implements CityControllerContract {
 
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         Optional<City> cityOptional  = service.findById(id);
@@ -86,7 +89,5 @@ public class CityControllerContactImpl implements CityControllerContract {
 
             throw new CityNotDeletedException(CityErrorMessage.CITY_NOT_DELETED_WITH_ID.getMessage() + id);
         }
-
-
     }
 }
