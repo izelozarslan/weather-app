@@ -2,7 +2,7 @@ package com.izelozarslan.weatherapp.security.auth;
 
 import com.izelozarslan.weatherapp.security.auth.dto.AuthenticationRequestDTO;
 import com.izelozarslan.weatherapp.security.auth.dto.AuthenticationResponseDTO;
-import com.izelozarslan.weatherapp.security.auth.dto.RegisterRequest;
+import com.izelozarslan.weatherapp.security.auth.dto.RegisterRequestDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class AuthenticationController {
     private final AuthenticationService service;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponseDTO> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthenticationResponseDTO> register(@RequestBody RegisterRequestDTO request) {
         return ResponseEntity.ok(service.register(request));
     }
 

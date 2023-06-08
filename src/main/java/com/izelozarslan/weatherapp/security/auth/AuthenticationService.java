@@ -3,12 +3,11 @@ package com.izelozarslan.weatherapp.security.auth;
 import com.izelozarslan.weatherapp.errormessages.UserErrorMessage;
 import com.izelozarslan.weatherapp.exception.userexceptions.exception.AuthenticationFailedException;
 import com.izelozarslan.weatherapp.exception.userexceptions.exception.UserNotCreatedException;
-import com.izelozarslan.weatherapp.exception.userexceptions.exception.UserNotFoundException;
 import com.izelozarslan.weatherapp.kafka.service.KafkaService;
 import com.izelozarslan.weatherapp.security.auth.config.JwtService;
 import com.izelozarslan.weatherapp.security.auth.dto.AuthenticationRequestDTO;
 import com.izelozarslan.weatherapp.security.auth.dto.AuthenticationResponseDTO;
-import com.izelozarslan.weatherapp.security.auth.dto.RegisterRequest;
+import com.izelozarslan.weatherapp.security.auth.dto.RegisterRequestDTO;
 import com.izelozarslan.weatherapp.security.token.Token;
 import com.izelozarslan.weatherapp.security.token.TokenRepository;
 import com.izelozarslan.weatherapp.security.token.TokenType;
@@ -20,7 +19,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
-import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,7 +38,7 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final KafkaService kafkaService;
 
-    public AuthenticationResponseDTO register(RegisterRequest request) {
+    public AuthenticationResponseDTO register(RegisterRequestDTO request) {
         try{
             validateEmailNotTaken(request.getEmail());
 
