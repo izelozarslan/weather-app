@@ -2,6 +2,7 @@ package com.izelozarslan.weatherapp.general;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,18 +15,20 @@ public abstract class BaseEntityService<E extends BaseEntity, R extends JpaRepos
 
     private final R repository;
 
+
     public E save(E entity) {
         BaseAdditionalFields baseAdditionalFields = entity.getBaseAdditionalFields();
-        if(baseAdditionalFields == null){
+        if (baseAdditionalFields == null) {
             baseAdditionalFields = new BaseAdditionalFields();
         }
 
-        if(entity.getId() == null) {
-            baseAdditionalFields.setCreateDate(LocalDateTime.now());            //baseAdditionalFields.setCreatedBy(0L); // TODO: JWT olsaydı oradan alacaktık
+        if (entity.getId() == null) {
+            baseAdditionalFields.setCreateDate(LocalDateTime.now());
+            baseAdditionalFields.setCreatedBy(getCurrentUser());
 
         }
         baseAdditionalFields.setUpdateDate(LocalDateTime.now());
-        //baseAdditionalFields.setUpdatedBy(0L); // TODO: JWT olsaydı oradan alacaktık
+        baseAdditionalFields.setUpdatedBy(getCurrentUser());
 
         entity.setBaseAdditionalFields(baseAdditionalFields);
         entity = repository.save(entity);
@@ -53,6 +56,9 @@ public abstract class BaseEntityService<E extends BaseEntity, R extends JpaRepos
         return repository.findById(id).orElseThrow();
     }
 
+    public String getCurrentUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
 
     public boolean isExist(Long id) {
         return repository.existsById(id);

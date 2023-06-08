@@ -24,7 +24,7 @@ public class UserController {
         return ResponseEntity.ok(RestResponse.of(userResponseDTOList));
     }
 
-    @GetMapping("/citiesByUser/{unit}")
+    @GetMapping("/user/cities/{unit}")
     public ResponseEntity<RestResponse<Map<String, WeatherData>>> findUsersSavedCitiesWeatherData(@PathVariable String unit){
         Map<String, WeatherData> citiesWeatherData = userControllerContract.findUsersSavedCitiesWeatherData(unit);
         return ResponseEntity.ok(RestResponse.of(citiesWeatherData));
