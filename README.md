@@ -46,6 +46,12 @@ mvn spring-boot:run
 ```
 Uygulama varsayılan olarak http://localhost:8080 adresinde çalışacaktır.
 
+### Kafka Kullanımı
+Projede loglama için kafka kullanılmıştır. Kafka Consumer projesinin adresi:
+```
+https://github.com/izelozarslan/AkbankKafkaConsumer
+```
+
 ## Kullanılan Teknolojiler
 Projenin geliştirilmesinde aşağıdaki teknolojiler kullanılmıştır:
 
